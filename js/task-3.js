@@ -1,46 +1,18 @@
-// Напиши клас StringBuilder, який приймає один параметр initialValue — довільний рядок, який записується у приватну властивість value об'єкта, що створюється.
+// 1. Знаходимо елементи в документі
+const nameInput = document.querySelector("#name-input");
+const nameOutput = document.querySelector("#name-output");
 
+// 2. Додаємо обробник події input
+// Чому саме input, а не change?
 
-
-// Оголоси наступні методи класу:
-
-// getValue() — повертає поточне значення приватної властивості value.
-// padEnd(str) — отримує параметр str (рядок) і додає його в кінець значення приватної властивості value об'єкта, який викликає цей метод.
-// padStart(str) — отримує параметр str (рядок) і додає його на початок значення приватної властивості value об'єкта, який викликає цей метод.
-// padBoth(str) — отримує параметр str (рядок) і додає його на початок і в кінець значення приватної властивості value об'єкта, який викликає цей метод.
-// Візьми код нижче з ініціалізацією екземпляра й викликами методів і встав його після оголошення класу для перевірки коректності роботи. У консоль будуть виведені результати їх роботи. Будь ласка, нічого там не змінюй.
-
-
-class StringBuilder {
-  #value;
-
-  constructor(initialValue) {
-    this.#value = initialValue;
-  }
-
-  getValue() {
-    return this.#value;
-  }
-
-  padEnd(str) {
-    this.#value += str;
-  }
-
-  padStart(str) {
-    this.#value = str + this.#value;
-  }
-
-  padBoth(str) {
-    this.#value = str + this.#value + str;
-  }
-}
-
-
-const builder = new StringBuilder(".");
-console.log(builder.getValue()); // "."
-builder.padStart("^");
-console.log(builder.getValue()); // "^."
-builder.padEnd("^");
-console.log(builder.getValue()); // "^.^"
-builder.padBoth("=");
-console.log(builder.getValue()); // "=^.^="
+// input — реагує миттєво на кожен символ, введений або видалений.
+// change — спрацює лише після того, як користувач вийде з інпуту (клікне в інше місце).
+nameInput.addEventListener("input", () => {
+  // 3. Отримуємо значення інпуту і прибираємо зайві пробіли
+  const trimmedValue = nameInput.value.trim();
+// nameInput.value — отримує текст, який користувач ввів у поле.
+        // trim() — метод, який прибирає пробіли з початку і кінця тексту:
+        
+  // 4. Оновлюємо текст у span, якщо є текст — підставляємо його, якщо ні — "Anonymous"
+  nameOutput.textContent = trimmedValue !== "" ? trimmedValue : "Anonymous";
+});
